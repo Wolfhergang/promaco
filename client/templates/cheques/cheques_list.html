@@ -1,0 +1,19 @@
+<template name="chequesList">
+	<div class="cheques">
+		<table class="table">
+			<tbody>
+			<tr>
+				<th>numero de cheque</th>	
+				<th>fecha a pagar</th>
+				<th>proveedor</th>
+				<th>monto</th>
+				<th>fecha registro</th>
+				<th>pagado?</th>
+			</tr>
+			{{#each cheques}}
+				{{> chequeItem}}
+			{{/each}}
+			</tbody>
+		</table>
+	</div>
+</template>
