@@ -1,0 +1,42 @@
+<template name="chequeNuevo">
+	<form class="form-vertical" role="form">
+		<div class="panel panel-default">
+			<div class="panel-heading"><h4>Nuevo cheque</h4></div>
+			<div class="panel-body">
+				<div class="col-sm-8 col-sm-offset-2">
+					<div class="form-group">
+						<label for="numero" class="control-label">Numero de cheque</label>
+						<div class="controls">
+							<input type="text" class="form-control" name="numero" placeholder="xxxxx" id="numero"/>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="fechaPago" class="control-label">Fecha de pago</label>
+						<div class="controls">
+							<input type="date" class="form-control" name="fechaPago" placeholder="{{hoy}}" id="fechaPago"/>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="monto" class="control-label">Monto de cheque</label>
+						<div class="controls">
+							<input type="number" min="1" class="form-control" name="monto" placeholder="1000" id="monto"/>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="proveedor" class="control-label">Paguese a:</label>
+						<div class="controls">
+							<input type="text" class="form-control" name="proveedor" placeholder="Portador?" id="proveedor"/>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<input type="submit" value="Guardar" class="btn btn-primary"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</template>
