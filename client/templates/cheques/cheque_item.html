@@ -5,6 +5,10 @@
 		<td>{{proveedor}}</td>
 		<td>{{monto}}</td>
 		<td>{{fechaRegistro}}</td>
-		<td>{{pagado}}</td>
+		{{#if pagado}}
+		<td><button type="submit" class="pagado btn btn-success">Si</button></td>
+		{{else}}
+		<td><button type="submit" class="pagado btn btn-danger">No</button></td>
+		{{/if}}
 	</tr>
 </template>
