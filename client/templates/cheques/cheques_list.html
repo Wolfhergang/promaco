@@ -1,5 +1,12 @@
 <template name="chequesList">
 	<div class="cheques">
+		<label for="ordenas">Ordenar por:</label>
+		<select name="ordenar" id="ordenar">
+			<option value="">Numero De Cheque</option>
+			<option value="">Fecha De Pago</option>
+			<option value="">Fecha De Registro</option>
+		</select>
+		<input type="checkbox" id="invertir">Invertir?
 		<table class="table">
 			<tbody>
 			<tr>
@@ -9,6 +16,7 @@
 				<th>Monto</th>
 				<th>Fecha Registro</th>
 				<th>Pagado?</th>
+				<th>Eliminar</th>
 			</tr>
 			{{#each cheques}}
 				{{> chequeItem}}
