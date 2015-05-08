@@ -1,3 +1,3 @@
-Meteor.publish("cheques", function(){
-	return Cheques.find();
+Meteor.publish("cheques", function(userId){
+	return Cheques.find({"userId": userId});
 });

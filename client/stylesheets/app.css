@@ -1,3 +1,15 @@
 .formulario{
 	padding: 0 0.5em;
 }
+
+.cheque{
+	background-color: #EACC49;
+}
+
+.si-pagado{
+	background-color: #A1EC80;
+}
+
+.hoy{
+	background-color: #EF8C8C;
+}

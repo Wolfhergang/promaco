@@ -19,18 +19,18 @@ Template.chequeNuevo.events({
 	'submit form': function (form, tmplt) {
 		form.preventDefault();
 
-		var hoy = new Date().toLocaleFormat('%d/%m/%Y'),
-			formul = form.target,
+		var formul = form.target,
+			hoy = new Date().toLocaleFormat('%d/%m/%Y'),
 			cheque = {
 				fechaPago : formul.fechaPago.value,
 				fechaRegistro : hoy,
 				monto : formul.monto.value,
 				pagado : false,
 				proveedor : formul.proveedor.value,
-				numero :formul.numero.value 
+				numero :formul.numero.value
 			};
 
-		cheque._id = Cheques.insert(cheque);
+		Meteor.call("cheque.nuevo", cheque);
 		Router.go("chequesList");
 	}
 });
