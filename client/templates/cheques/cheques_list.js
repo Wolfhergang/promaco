@@ -1,6 +1,6 @@
 Template.chequesList.created = function() {
     this.invert = new ReactiveVar(1);
-    this.filter = new ReactiveVar({"numero": 1});
+    this.filter = new ReactiveVar({"pagado": 1, "fechaPago": 1});
 };
 
 Template.chequesList.helpers({
@@ -19,6 +19,8 @@ Template.chequesList.events({
 			tmplt.filter.set({"fechaPago": inv});
 		}else if (selFilter == "Fecha De Registro") {
 			tmplt.filter.set({"fechaRegistro": inv});
+		} else if (selFilter == "No pagados"){
+			tmplt.filter.set({"pagado": inv, "fechaPago": 1});
 		} else {
 			tmplt.filter.set({"numero": inv});
 		}
