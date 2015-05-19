@@ -1,7 +1,7 @@
 Template.chequeNuevo.helpers({
 	hoy: function () {
 		var hoy = new Date();
-		hoy = hoy.toLocaleFormat('%d/%m/%Y');
+		hoy = formatFecha(hoy);
 		return hoy;
 	}
 });
@@ -20,7 +20,7 @@ Template.chequeNuevo.events({
 		form.preventDefault();
 
 		var formul = form.target,
-			hoy = new Date().toLocaleFormat('%d/%m/%Y'),
+			hoy = formatFecha(new Date()),
 			cheque = {
 				fechaPago : formul.fechaPago.value,
 				fechaRegistro : hoy,
@@ -34,3 +34,22 @@ Template.chequeNuevo.events({
 		Router.go("chequesList");
 	}
 });
+
+formatFecha = function(fecha){
+	var dia = fecha.getDate(),
+		mes = fecha.getMonth(),
+		año = fecha.getFullYear();
+		if (mes<10) {
+			mes="0"+mes;
+		}
+		fechaC = dia+"/"+mes+"/"+año;
+		return fechaC;
+}
+
+function stopRKey(evt) {
+  var evt = (evt) ? evt : ((event) ? event : null);
+  var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+  if ((evt.keyCode == 13) && (node.type=="text"))  {return false;}
+}
+
+document.onkeypress = stopRKey; 

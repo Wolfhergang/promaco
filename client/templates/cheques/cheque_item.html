@@ -1,10 +1,9 @@
 <template name="chequeItem">
 	<tr class="cheque {{isPagado}} {{pagarseHoy}}">
 		<td>{{numero}}</td>
-		<td>{{fechaPago}}</td>
 		<td>{{proveedor}}</td>
 		<td>{{monto}}</td>
-		<td>{{fechaRegistro}}</td>
+		<td>{{fechaPago}}</td>
 		{{#if pagado}}
 		<td><button type="submit" class="pagado btn btn-success">Si</button></td>
 		{{else}}
