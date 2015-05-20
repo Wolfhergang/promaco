@@ -12,6 +12,7 @@
 			</div>
 			<div class="collapse navbar-collapse" id="navigation">
 				<ul class="nav navbar-nav">
+					{{#if currentUser}}<li><a href="{{pathFor 'chequesList'}}">Listado de cheques</a></li>{{/if}}
 					{{#if currentUser}}<li><a href="{{pathFor 'chequeNuevo'}}">Nuevo cheque</a></li>{{/if}}
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
