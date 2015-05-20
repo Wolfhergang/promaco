@@ -1,11 +1,11 @@
-Template.chequeNuevo.helpers({
+Template.chequeEditar.helpers({
 	fechaPagoFormateada: function (){
 		var fecha = formatFecha(this.fechaPago);
 		return fecha;
 	}
 });
 
-Template.chequeNuevo.rendered = function () {
+Template.chequeEditar.rendered = function () {
 	$('#fechaPago').datepicker({
 	    format: "dd/mm/yyyy",
 	    language: "es",
@@ -14,7 +14,7 @@ Template.chequeNuevo.rendered = function () {
 	});
 };
 
-Template.chequeNuevo.events({
+Template.chequeEditar.events({
 	'submit form': function (form, tmplt) {
 		form.preventDefault();
 		var formul = form.target,
@@ -27,7 +27,7 @@ Template.chequeNuevo.events({
 				numero :formul.numero.value
 			};
 
-		Meteor.call("cheque.editar", cheque, propiedades);
+		Meteor.call("cheque.editar", this._id, propiedades);
 		Router.go("chequesList");
 	}
 });

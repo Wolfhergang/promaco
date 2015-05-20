@@ -1,6 +1,6 @@
 <template name="chequesList">
 	<div class="cheques">
-		<label for="ordenas">Ordenar por:</label>
+		<label for="ordenar">Ordenar por:</label>
 		<select name="ordenar" id="ordenar">
 			<option value="">No pagados</option>
 			<option value="">Numero De Cheque</option>
@@ -8,6 +8,12 @@
 			<option value="">Monto</option>
 		</select>
 		<input type="checkbox" id="invertir">Invertir?
+		<label for="monto">Monto:</label>
+		<input type="number" step="any" min="0" value="0" id="monto">
+		<label for="acubrir">Vencimientos al dia de hoy:</label>
+		<span id="acubrir">0</span>
+		<label for="acubrirm">Vencimientos al dia de mañana:</label>
+		<span id="acubrirm">0</span>
 		<table class="table">
 			<tbody>
 			<tr>

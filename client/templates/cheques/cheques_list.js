@@ -10,6 +10,22 @@ Template.chequesList.helpers({
 	}
 });
 
+Template.chequesList.onRendered(function (){
+	var monto = 0,
+		disponible = parseFloat($("#monto").val());
+	$(".pago-vencido").each(function (index){
+		monto = monto + parseFloat(this.innerHTML);
+	});
+	$("#acubrir").text(monto-disponible);
+	$(".pago-por-vencer").each(function (index){
+		monto = monto + parseFloat(this.innerHTML);
+	});
+	$("#acubrirm").text(monto-disponible);
+	$('#monto').keyup(function() { 
+		calcularMontos();
+	});
+});
+
 Template.chequesList.events({
 	'change #ordenar': function (e, tmplt) {
 		e.preventDefault();
@@ -34,3 +50,20 @@ Template.chequesList.events({
 		}
 	}
 });
+
+function calcularMontos(){
+	var monto = 0,
+		disponible = parseFloat($("#monto").val());
+	if (disponible<1 || !parseFloat(disponible)) {
+		disponible = 0;
+	}
+	$(".pago-vencido").each(function (index){
+		monto = monto + parseFloat(this.innerHTML);
+	});
+	$("#acubrir").text(monto-disponible);
+	$(".pago-por-vencer").each(function (index){
+		monto = monto + parseFloat(this.innerHTML);
+	});
+	$("#acubrirm").text(monto-disponible);
+};
+ 

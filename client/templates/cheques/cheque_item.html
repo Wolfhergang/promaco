@@ -1,8 +1,8 @@
 <template name="chequeItem">
 	<tr class="cheque {{isPagado}} {{pagarseHoy}}">
-		<td>{{numero}}</td>
+		<a href="{{pathFor 'chequeEditar'}}"><td>{{numero}}</td></a>
 		<td>{{proveedor}}</td>
-		<td>{{monto}}</td>
+		<td class="{{pagoVencido}}">{{monto}}</td>
 		<td>{{fechaPagoFormateada}}</td>
 		{{#if pagado}}
 		<td><button type="submit" class="pagado btn btn-success">Si</button></td>

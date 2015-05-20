@@ -14,6 +14,16 @@ Template.chequeItem.helpers({
 	fechaPagoFormateada: function (){
 		var fecha = formatFecha(this.fechaPago);
 		return fecha;
+	},
+	pagoVencido: function (){
+		var hoy = new Date(),
+			tomorrow = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+1),
+			fechaC = new Date(this.fechaPago);
+		if (fechaC <= hoy  && !this.pagado) {
+			return "pago-vencido";
+		}else if (fechaC <= tomorrow  && !this.pagado) {
+			return "pago-por-vencer";
+		}
 	}
 });
 
