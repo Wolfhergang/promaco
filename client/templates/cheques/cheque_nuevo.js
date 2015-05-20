@@ -18,12 +18,11 @@ Template.chequeNuevo.rendered = function () {
 Template.chequeNuevo.events({
 	'submit form': function (form, tmplt) {
 		form.preventDefault();
-
 		var formul = form.target,
-			hoy = formatFecha(new Date()),
+			fp = formul.fechaPago.value.split("/"),
+			pagarse = new Date(fp[2],parseInt(fp[1], 10)-1,fp[0]),
 			cheque = {
-				fechaPago : formul.fechaPago.value,
-				fechaRegistro : hoy,
+				fechaPago : pagarse,
 				monto : formul.monto.value,
 				pagado : false,
 				proveedor : formul.proveedor.value,
@@ -37,7 +36,7 @@ Template.chequeNuevo.events({
 
 formatFecha = function(fecha){
 	var dia = fecha.getDate(),
-		mes = fecha.getMonth(),
+		mes = parseInt(fecha.getMonth(), 10) + 1,
 		año = fecha.getFullYear();
 		if (mes<10) {
 			mes="0"+mes;

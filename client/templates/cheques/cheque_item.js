@@ -5,12 +5,15 @@ Template.chequeItem.helpers({
 		}
 	},
 	pagarseHoy: function (){
-		var hoy = new Date();
-		fecha_split = this.fechaPago.split("/");
-		fechaC = new Date(fecha_split[2], parseInt(fecha_split[1])-1, fecha_split[0]);
+		var hoy = new Date(),
+			fechaC = new Date(this.fechaPago);
 		if (fechaC <= hoy  && !this.pagado) {
 			return "hoy";
 		}
+	},
+	fechaPagoFormateada: function (){
+		var fecha = formatFecha(this.fechaPago);
+		return fecha;
 	}
 });
 
@@ -31,7 +34,7 @@ Template.chequeItem.events({
 
 formatFecha = function(fecha){
 	var dia = fecha.getDate(),
-		mes = fecha.getMonth(),
+		mes = parseInt(fecha.getMonth(), 10) + 1,
 		año = fecha.getFullYear();
 		if (mes<10) {
 			mes="0"+mes;

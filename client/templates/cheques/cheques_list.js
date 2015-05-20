@@ -17,8 +17,8 @@ Template.chequesList.events({
 			inv = tmplt.invert.get();
 		if (selFilter == "Fecha De Pago") {
 			tmplt.filter.set({"fechaPago": inv});
-		}else if (selFilter == "Fecha De Registro") {
-			tmplt.filter.set({"fechaRegistro": inv});
+		}else if (selFilter == "Monto") {
+			tmplt.filter.set({"monto": inv});
 		} else if (selFilter == "No pagados"){
 			tmplt.filter.set({"pagado": inv, "fechaPago": 1});
 		} else {
