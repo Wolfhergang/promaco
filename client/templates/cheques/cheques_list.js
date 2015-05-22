@@ -16,11 +16,11 @@ Template.chequesList.onRendered(function (){
 	$(".pago-vencido").each(function (index){
 		monto = monto + parseFloat(this.innerHTML);
 	});
-	$("#acubrir").text(monto-disponible);
+	$("#acubrir").text((monto-disponible).toFixed(2));
 	$(".pago-por-vencer").each(function (index){
 		monto = monto + parseFloat(this.innerHTML);
 	});
-	$("#acubrirm").text(monto-disponible);
+	$("#acubrirm").text((monto-disponible).toFixed(2));
 	$('#monto').keyup(function() { 
 		calcularMontos();
 	});
@@ -60,10 +60,10 @@ function calcularMontos(){
 	$(".pago-vencido").each(function (index){
 		monto = monto + parseFloat(this.innerHTML);
 	});
-	$("#acubrir").text(monto-disponible);
+	$("#acubrir").text((monto-disponible).toFixed(2));
 	$(".pago-por-vencer").each(function (index){
 		monto = monto + parseFloat(this.innerHTML);
 	});
-	$("#acubrirm").text(monto-disponible);
+	$("#acubrirm").text((monto-disponible).toFixed(2));
 };
  
