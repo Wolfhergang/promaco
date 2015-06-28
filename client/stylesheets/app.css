@@ -14,6 +14,10 @@
 	background-color: #A1EC80;
 }
 
+.inline{
+	display: inline-block;
+}
+
 #invertir{
 	position: relative;
 	top: 3px;

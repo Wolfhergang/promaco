@@ -11,6 +11,16 @@
 			<label for="invertir">Invertir?</label>
 			<input type="checkbox" id="invertir">
 			<span>|</span>
+			<label for="mes-inicio">Desde el dia 1 de:</label>
+			<div id="mes-inicio" class="inline">
+				{{> meses}}
+			</div>
+			<label for="year-busqueda">Del:</label>
+			<select name="year-busqueda" id="year-busqueda">
+				<option value="">2015</option>
+				<option value="">2016</option>
+				<option value="">2017</option>
+			</select>
 			<input type="text" id="buscar" placeholder="buscar...">
 		</form>
 		<label for="monto">Monto:</label>

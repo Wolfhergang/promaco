@@ -1,4 +1,5 @@
 Template.chequesList.created = function() {
+    this.mes = new ReactiveVar({});
     this.invert = new ReactiveVar(1);
     this.filter = new ReactiveVar({"pagado": 1, "fechaPago": 1});
     this.search = new ReactiveVar({"proveedor": {$regex: "", $options: 'i'}});
@@ -6,8 +7,9 @@ Template.chequesList.created = function() {
 
 Template.chequesList.helpers({
 	cheques: function () {
-		var or = Template.instance().filter.get();
-		return Cheques.find(Template.instance().search.get() ,{sort : or});
+		var or = Template.instance().filter.get(),
+			srch = _.extend(Template.instance().search.get(), Template.instance().mes.get());
+		return Cheques.find(srch ,{sort : or});
 	}
 });
 
@@ -57,6 +59,13 @@ Template.chequesList.events({
 		e.preventDefault();
 		var busqueda = $("#buscar").val();
 		tmplt.search.set({"proveedor": {$regex: busqueda, $options: 'i'}});
+	},
+	'change #year-busqueda, change #mes-inicio select' : function(e, tmplt){
+		e.preventDefault();
+		var year = parseInt($("#year-busqueda").find(":selected").text()),
+			mes	= $("#mes-inicio").find(":selected").index(),
+			fechaInicio = new Date(year, mes, 1);
+		tmplt.mes.set({"fechaPago": {$gte: fechaInicio}});
 	}
 });
 
@@ -75,4 +84,3 @@ function calcularMontos(){
 	});
 	$("#acubrirm").text((monto-disponible).toFixed(2));
 };
- 
