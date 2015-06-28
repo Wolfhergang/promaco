@@ -1,12 +1,13 @@
 Template.chequesList.created = function() {
     this.invert = new ReactiveVar(1);
     this.filter = new ReactiveVar({"pagado": 1, "fechaPago": 1});
+    this.search = new ReactiveVar({"proveedor": {$regex: "", $options: 'i'}});
 };
 
 Template.chequesList.helpers({
 	cheques: function () {
 		var or = Template.instance().filter.get();
-		return Cheques.find({},{sort : or});
+		return Cheques.find(Template.instance().search.get() ,{sort : or});
 	}
 });
 
@@ -24,6 +25,9 @@ Template.chequesList.onRendered(function (){
 	$('#monto').keyup(function() { 
 		calcularMontos();
 	});
+	$("#buscar").keyup(function(){
+		$("form").delay(200).submit();
+	});
 });
 
 Template.chequesList.events({
@@ -33,8 +37,8 @@ Template.chequesList.events({
 			inv = tmplt.invert.get();
 		if (selFilter == "Fecha De Pago") {
 			tmplt.filter.set({"fechaPago": inv});
-		}else if (selFilter == "Monto") {
-			tmplt.filter.set({"monto": inv});
+		}else if (selFilter == "Alfabetico") {
+			tmplt.filter.set({"proveedor": inv, "fechaPago": 1});
 		} else if (selFilter == "No pagados"){
 			tmplt.filter.set({"pagado": inv, "fechaPago": 1});
 		} else {
@@ -48,6 +52,11 @@ Template.chequesList.events({
 		}else{
 			tmplt.invert.set(1);
 		}
+	},
+	'submit form': function (e, tmplt){
+		e.preventDefault();
+		var busqueda = $("#buscar").val();
+		tmplt.search.set({"proveedor": {$regex: busqueda, $options: 'i'}});
 	}
 });
 

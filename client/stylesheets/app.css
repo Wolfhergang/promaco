@@ -13,3 +13,8 @@
 .si-pagado{
 	background-color: #A1EC80;
 }
+
+#invertir{
+	position: relative;
+	top: 3px;
+}
