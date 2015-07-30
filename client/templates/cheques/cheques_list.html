@@ -1,35 +1,44 @@
 <template name="chequesList">
 	<div class="cheques">
-		<form class="form-inline">
-			<label for="ordenar">Ordenar por:</label>
-			<select name="ordenar" id="ordenar">
-				<option value="">No pagados</option>
-				<option value="">Numero De Cheque</option>
-				<option value="">Fecha De Pago</option>
-				<option value="">Alfabetico</option>
-			</select>
-			<label for="invertir">Invertir?</label>
-			<input type="checkbox" id="invertir">
-			<span>|</span>
-			<label for="mes-inicio">Desde el dia 1 de:</label>
-			<div id="mes-inicio" class="inline">
-				{{> meses}}
-			</div>
-			<label for="year-busqueda">Del:</label>
-			<select name="year-busqueda" id="year-busqueda">
-				<option value="">2015</option>
-				<option value="">2016</option>
-				<option value="">2017</option>
-			</select>
-			<input type="text" id="buscar" placeholder="buscar...">
-		</form>
-		<label for="monto">Monto:</label>
-		<input type="number" step="any" min="0" value="0" id="monto">
-		<label for="acubrir">Vencimientos al dia de hoy:</label>
-		<span id="acubrir">0</span>
-		<label for="acubrirm">Vencimientos al dia de mañana:</label>
-		<span id="acubrirm">0</span>
-		<table class="table">
+    <form>
+      <div class="col-sm-6">
+        <label for="ordenar">Ordenar por:</label>
+        <select name="ordenar" id="ordenar">
+          <option value="">No pagados</option>
+          <option value="">Numero De Cheque</option>
+          <option value="">Fecha De Pago</option>
+          <option value="">Alfabetico</option>
+        </select>
+        <label for="invertir">Invertir?</label>
+        <input type="checkbox" id="invertir">
+        <br>
+        <label for="mes-inicio">Desde el dia 1 de:</label>
+        <div id="mes-inicio" class="inline">
+          {{> meses}}
+        </div>
+        <label for="year-busqueda">Del:</label>
+        <select name="year-busqueda" id="year-busqueda">
+          <option value="">2015</option>
+          <option value="">2016</option>
+          <option value="">2017</option>
+        </select>
+      </div>
+      <div class="col-sm-3 col-sm-offset-3">
+        <div class="input-group">
+            <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+            <input class="form-control" type="text" id="buscar" placeholder="buscar...">
+        </div>
+      </div>
+    </form>
+    <div class="col-sm-12">
+  		<label for="monto">Monto:</label>
+  		<input type="number" step="any" min="0" value="0" id="monto">
+  		<label for="acubrir">Vencimientos al dia de hoy:</label>
+  		$<span id="acubrir">0</span>
+  		<label for="acubrirm">Vencimientos al dia de mañana:</label>
+  		$<span id="acubrirm">0</span>
+    </div>
+		<table class="table col-sm-12">
 			<tbody>
 			<tr>
 				<th>Numero De Cheque</th>
@@ -37,7 +46,7 @@
 				<th>Monto</th>
 				<th>Fecha de Pago</th>
 				<th>Pagado?</th>
-				<th>Eliminar</th>
+				<th></th>
 			</tr>
 			{{#each cheques}}
 				{{> chequeItem}}

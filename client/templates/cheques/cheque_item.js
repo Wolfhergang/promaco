@@ -39,7 +39,12 @@ Template.chequeItem.events({
 		if (confirm("¿Seguro que desea eliminar este cheque?")) {
 			Meteor.call("cheque.eliminar", this._id);
 		}
-	}
+	},
+  'click .editar': function(e) {
+    e.preventDefault();
+    console.log("hi");
+    Router.go('chequeEditar', {_id: this._id});
+  }
 });
 
 formatFecha = function(fecha){
