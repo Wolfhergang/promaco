@@ -1,15 +1,17 @@
 Template.chequesList.created = function() {
-    this.mes = new ReactiveVar({});
+    var hoy = new Date();
+    hoy.setDate(1);
+    this.fecha = new ReactiveVar({"fechaPago": {$gte: hoy}});
     this.invert = new ReactiveVar(1);
     this.filter = new ReactiveVar({"pagado": 1, "fechaPago": 1});
-    this.search = new ReactiveVar({"proveedor": {$regex: "", $options: 'i'}});
+    this.proveedor = new ReactiveVar({"proveedor": {$regex: "", $options: 'i'}});
 };
 
 Template.chequesList.helpers({
 	cheques: function () {
-		var or = Template.instance().filter.get(),
-			srch = _.extend(Template.instance().search.get(), Template.instance().mes.get());
-		return Cheques.find(srch ,{sort : or});
+    var busqueda = {};
+    _.extend(busqueda, Template.instance().proveedor.get(), Template.instance().fecha.get());
+		return Cheques.find(busqueda ,{sort : Template.instance().filter.get()});
 	}
 });
 
@@ -58,14 +60,14 @@ Template.chequesList.events({
 	'submit form': function (e, tmplt){
 		e.preventDefault();
 		var busqueda = $("#buscar").val();
-		tmplt.search.set({"proveedor": {$regex: busqueda, $options: 'i'}});
+		tmplt.proveedor.set({"proveedor": {$regex: busqueda, $options: 'i'}});
 	},
 	'change #year-busqueda, change #mes-inicio select' : function(e, tmplt){
 		e.preventDefault();
 		var year = parseInt($("#year-busqueda").find(":selected").text()),
-			mes	= $("#mes-inicio").find(":selected").index(),
-			fechaInicio = new Date(year, mes, 1);
-		tmplt.mes.set({"fechaPago": {$gte: fechaInicio}});
+    	mes	= $("#mes-inicio").find(":selected").index(),
+    	fechaInicio = new Date(year, mes, 1);
+		tmplt.fecha.set({"fechaPago": {$gte: fechaInicio}});
 	}
 });
 
