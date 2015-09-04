@@ -26,7 +26,8 @@ Template.chequeNuevo.events({
 				monto : formul.monto.value,
 				pagado : false,
 				proveedor : formul.proveedor.value,
-				numero :formul.numero.value
+				numero :formul.numero.value,
+				numeroFactura : formul.numeroFactura.value
 			};
 
 		Meteor.call("cheque.nuevo", cheque);

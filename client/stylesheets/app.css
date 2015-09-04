@@ -22,3 +22,13 @@
 	position: relative;
 	top: 3px;
 }
+
+.badge-fix{
+	bottom: 5px;
+	position: fixed;
+	left: 5px;
+}
+
+.badge-fix span{
+	display: inline-block;
+}

@@ -24,7 +24,8 @@ Template.chequeEditar.events({
 				fechaPago : pagarse,
 				monto : formul.monto.value,
 				proveedor : formul.proveedor.value,
-				numero :formul.numero.value
+				numero :formul.numero.value,
+				numeroFactura : formul.numeroFactura.value
 			};
 
 		Meteor.call("cheque.editar", this._id, propiedades);

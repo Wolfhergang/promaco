@@ -41,8 +41,9 @@
 		<table class="table col-sm-12">
 			<tbody>
 			<tr>
-				<th>Numero De Cheque</th>
+				<th>Numero de Cheque</th>
 				<th>Paguese A:</th>
+        <th>Numero de Factura</th>
 				<th>Monto</th>
 				<th>Fecha de Pago</th>
 				<th>Pagado?</th>
@@ -53,5 +54,10 @@
 			{{/each}}
 			</tbody>
 		</table>
+    <div class="badge-fix">
+      <span class="label label-success">Pagados</span>
+      <span class="label label-warning">No vencidos</span>
+      <span class="label label-danger">Vencidos</span>
+    </div>
 	</div>
 </template>
