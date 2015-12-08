@@ -5,12 +5,13 @@
 # but you can also edit it by hand.
 
 meteor-platform
-iron:router
 aldeed:simple-schema
 underscore
 twbs:bootstrap
-sacha:spin
-ian:accounts-ui-bootstrap-3
 accounts-password
-rajit:bootstrap3-datepicker
-reactive-var
+angular
+angularui:angular-ui-router
+angularui:angular-ui-bootstrap
+fortawesome:fontawesome
+alanning:roles
+matb33:collection-hooks

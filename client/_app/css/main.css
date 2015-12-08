@@ -1,0 +1,15 @@
+.i-do-something{
+  cursor: pointer;
+}
+
+.pagado{
+	background-color: #A1EC80;
+}
+
+.no-pagado{
+	background-color: #EACC49;
+}
+
+.hoy{
+	background-color: #EF8C8C;
+}

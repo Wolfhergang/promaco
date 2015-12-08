@@ -1,0 +1,39 @@
+<form role="form" name="form" class="col-xs-12 form-horizontal">
+	<div class="form-group" ng-class="{'has-error': form.numeroDeCheque.$invalid}">
+		<label class="control-label col-sm-3">Numero de cheque</label>
+		<div class="col-sm-7">
+			<input name="numeroDeCheque" type="text" class="form-control" ng-model="cheque.numero" required/>
+		</div>
+	</div>
+
+	<div class="form-group" ng-class="{'has-error': form.numeroDeFactura.$invalid}">
+		<label class="control-label col-sm-3">Numero de factura</label>
+		<div class="col-sm-7">
+			<input name="numeroDeFactura" type="text" class="form-control" ng-model="cheque.numeroFactura" required/>
+		</div>
+	</div>
+
+	<div class="form-group" ng-class="{'has-error': form.fechaDePago.$invalid}">
+		<label class="control-label col-sm-3">Fecha de pago</label>
+		<div class="col-sm-7">
+			<input name="fechaDePago" class="form-control" ng-model="cheque.fechaPago" type="text" datepicker-popup="dd/MM/yyyy" is-open="settings.calOpened" show-button-bar="false" readonly ng-click="settings.calOpened = !settings.CalOpened" required>
+		</div>
+	</div>
+
+	<div class="form-group" ng-class="{'has-error': form.montoDeCheque.$invalid}">
+		<label class="control-label col-sm-3">Monto de cheque</label>
+		<div class="col-sm-7">
+			<input name="montoDeCheque" type="number" step="any" min="1" class="form-control" ng-model="cheque.monto" required/>
+		</div>
+	</div>
+
+	<div class="form-group" ng-class="{'has-error': form.pagueseA.$invalid}">
+		<label class="control-label col-sm-3">Paguese a:</label>
+		<div class="col-sm-7">
+			<input name="pagueseA" type="text" class="form-control" ng-model="cheque.proveedor" typeahead="proveedor.nombre for proveedor in proveedores" required/>
+		</div>
+	</div>
+</form>
+<div class="col-xs-12 col-sm-4 col-sm-offset-4">
+	<button class="btn btn-success btn-block" ng-disabled="form.$invalid" ng-click="guardar()">Guardar</button>
+</div>
