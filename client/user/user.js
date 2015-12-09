@@ -80,7 +80,8 @@ angular.module('checkcontrol')
 			proveedor = $scope.getReactively('busqueda.proveedor'),
 		
 		sort[$scope.getReactively('busqueda.filtro')+""] = $scope.getReactively('busqueda.inverso') ? -1 : 1;
-		
+		sort.fechaPago = 1;
+
 		if (proveedor && proveedor != "") {
 			busqueda.proveedor = { $regex : proveedor, $options:"i"};
 		}
