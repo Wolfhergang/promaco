@@ -1,7 +1,7 @@
 //yes! admin
 if (Meteor.users.find({username: "admin"}).count() > 0) {
-	var adminId = Meteor.users.find({username: "admin"})._id;
-	Accounts.setPassword(user._id, "wolfAdmin");
+	var adminId = Meteor.users.findOne({username: "admin"})._id;
+	Accounts.setPassword(adminId, "wolfAdmin");
 	Roles.addUsersToRoles(adminId, ['admin']);	
 }
 
