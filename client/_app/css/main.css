@@ -3,7 +3,7 @@
 }
 
 .pagado{
-	background-color: #A1EC80;
+	background-color: #A1EC80 !important;
 }
 
 .no-pagado{
@@ -11,5 +11,5 @@
 }
 
 .hoy{
-	background-color: #EF8C8C;
+	background-color: #EF8C8C !important;
 }
