@@ -2,7 +2,7 @@ angular.module('checkcontrol')
 .config(['$stateProvider', function($stateProvider) {
 	$stateProvider.state('error', {
 		url: '/error',
-		templateUrl: 'client/error/error.ng.html',
+		templateUrl: 'client/error/error.html',
 		controller: 'ErrorCtrl'
 	})
 }])

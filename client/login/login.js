@@ -1,56 +1,61 @@
 angular.module('checkcontrol')
-.config(['$stateProvider', function($stateProvider) {
+.config(function($stateProvider) {
 	$stateProvider.state('login', {
 		abstract: true,
-		url: '/login',
+		url: '',
 		template: '<div ui-view></div>',
 		resolve: {
-			currentUser: ['$meteor', function($meteor) {
-				return $meteor.waitForUser();
-			}]
+			currentUser: function($auth) {
+				return $auth.waitForUser();
+			}
 		}
 	})
 	.state('login.login', {
-		url: '',
-		templateUrl: 'client/login/login.ng.html',
+		url: '/',
+		templateUrl: 'client/login/login.html',
 		controller: 'Login.LoginCtrl'
 	})
 	.state('login.register', {
 		url: '/register',
-		templateUrl: 'client/login/register.ng.html',
+		templateUrl: 'client/login/register.html',
 		controller: 'Login.RegisterCtrl'
 	});
-}])
-.controller('Login.LoginCtrl', ['$scope', '$state', 'currentUser', 'Notification', function($scope, $state, cu, Notification) {
-	if(cu) {
-		Notification.success("logueado como " + cu.username);
-		if (_.contains(cu.roles, 'admin')){
+})
+.controller('Login.LoginCtrl', function($scope, $state, currentUser, Notification) {
+	if(currentUser) {
+		Notification.success("logueado como " + currentUser.username);
+		if (_.contains(currentUser.roles, 'admin')){
 			$state.go('admin.index');
-		} 
-		$state.go('user.index');		
+		}else{
+			$state.go('user.index');		
+		}
 	}
 
 	$scope.username = '';
 	$scope.password = '';
-	$scope.cu = cu;
+	$scope.currentUser = currentUser;
 
 	$scope.login = function() {
-		$scope.$meteor.loginWithPassword($scope.username, $scope.password).then(function() {
-			Notification.success("logueado como " + $scope.username);
+		Meteor.loginWithPassword($scope.username, $scope.password, (error) => {
+			if (error) {
+				Notification.error(error.reason);
+				console.error(error);
+				return;
+			}
+
+			Notification.success("Bienvenido " + $scope.username);
 			if (_.contains(Meteor.user().roles, 'admin')){
 				$state.go('admin.index');
 			}else{
 				$state.go('user.index');
 			}
-		}, function(err) {
-			alert(err.reason);
 		});
 	};
-}])
-.controller('Login.RegisterCtrl', ['$scope', '$state', 'currentUser', 'Notification', function($scope, $state, cu, Notification) {
-	if(cu) {
-		Notification.success("logueado como " + cu.username);
-		if (_.contains(cu.roles, 'admin')){
+})
+.controller('Login.RegisterCtrl', function($scope, $state, $meteor, currentUser, Notification) {
+	if(currentUser) {
+		Notification.success("logueado como " + currentUser.username);
+		if (_.contains(currentUser.roles, 'admin')){
 			$state.go('admin.index');
 		} 
 		$state.go('user.index');
@@ -60,14 +65,19 @@ angular.module('checkcontrol')
 
 	$scope.register = function() {
 		if ($scope.form.$invalid) return;
-		$scope.$meteor.call('login.register', $scope.user).then(function() {
-			$scope.$meteor.loginWithPassword($scope.user.username, $scope.user.password).then(function() {
+
+		Meteor.call('login.register', $scope.user, (error, result) => {
+			if (error) {
+				Notification.error(error.reason);
+				console.error(error);
+				return;
+			}
+
+			console.log(result);
+			Meteor.loginWithPassword($scope.user.username, $scope.user.password, () => {
 				$state.go('user.index');			
 			});
-		}, function(err) {
-			if (err.reason = "Match failed") Notification.error({message: "The passwords dont match"});
-			else Notification.error({message: err.reason});
 		});
 	};
-}])
+})
 ;

@@ -1,13 +1,13 @@
 angular.module('checkcontrol')
 .directive('header', function() {
 	return {
-		templateUrl: 'client/_app/directives/header/header.ng.html',
+		templateUrl: 'client/_app/directives/header/header.html',
 		restrict: 'E',
 		replace: true,
 		controller: ['$scope', '$meteor', '$modal', '$state', 'Notification', function($scope, $meteor, $modal, $state, Notification) {
 			$scope.logout = function(){
 				$modal.open({
-					templateUrl: 'client/modals/confirm.ng.html',
+					templateUrl: 'client/modals/confirm.html',
 					controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 						$scope.action = "salir";
 					}]

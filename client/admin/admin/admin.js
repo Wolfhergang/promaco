@@ -1,12 +1,12 @@
 angular.module('checkcontrol')
-.config(['$stateProvider', function($stateProvider) {
+.config(function($stateProvider) {
 	$stateProvider.state('admin', {
 		url: '/admin',
 		abstract: true,
-		templateUrl: 'client/index.ng.html',
+		templateUrl: 'client/index.html',
 		resolve: {
 			currentUser: ['$meteor', function($meteor) {
-				return $meteor.requireValidUser(function(user) {
+				return $auth.requireValidUser(function(user) {
 					return _.contains(user.roles, "admin");
 				});
 			}]
@@ -14,7 +14,7 @@ angular.module('checkcontrol')
 	})
 	.state('admin.index', {
 		url: '',
-		templateUrl: 'client/admin/admin/index.ng.html',
+		templateUrl: 'client/admin/admin/index.html',
 		controller: 'adminIndexCtrl',
 		resolve: {
 			usersSub: ['$meteor', function($meteor){
@@ -25,13 +25,13 @@ angular.module('checkcontrol')
 			}]
 		}
 	})
-}])
-.controller('adminIndexCtrl', ['$scope', '$meteor' ,'$modal', 'users', 'Notification', function($scope, $meteor, $modal, users, Notification){
+})
+.controller('adminIndexCtrl', function($scope, $meteor, $modal, users, Notification){
 	$scope.users = users;
 
 	$scope.cambiarPass = function(user){
 		$modal.open({
-			templateUrl: 'client/modals/changePassword.ng.html'
+			templateUrl: 'client/modals/changePassword.html'
 		}).result.then(function(newPassword) {
 			$meteor.call("change-password", user.username, newPassword).then(function(data){
 				Notification.success({message: "Password de "+user.username+" cambiado", delay: 2000});
@@ -44,7 +44,7 @@ angular.module('checkcontrol')
 	
 	$scope.borrar = function(user){
 		$modal.open({
-			templateUrl: 'client/modals/confirm.ng.html',
+			templateUrl: 'client/modals/confirm.html',
 			controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
 				$scope.action = "eliminar este usuario";
 			}]
@@ -57,5 +57,5 @@ angular.module('checkcontrol')
 			});
 		});
    	};
-}])
+})
 ;

@@ -13,3 +13,26 @@
 .hoy{
 	background-color: #EF8C8C !important;
 }
+
+.floating-plus{
+	position: fixed;
+	bottom: 5px;
+	right: 1em;
+}
+
+.badge-fix{
+	bottom: 5px;
+	position: fixed;
+	left: 5px;
+}
+
+.badge-fix span{
+	display: inline-block;
+}
+
+#invertir{
+	position: relative;
+	top: 6px;
+	width: 20px;
+	height: 20px;
+}

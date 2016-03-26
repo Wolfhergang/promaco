@@ -15,7 +15,6 @@
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
-				<li ng-if="currentUser"><a ui-sref="user.nuevo">Nuevo cheque</a></li>
 				<li ng-if="!currentUser"><a ui-sref="login.register">Register</a></li>
 				<li ng-if="!currentUser"><a ui-sref="login.login">Log-in</a></li>
 				<li ng-if="currentUser"><a ng-click="logout()" class="i-do-something"><i class="fa fa-sign-out"></i> Logout</a></li>

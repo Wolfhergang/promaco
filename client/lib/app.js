@@ -1,7 +1,5 @@
-angular.module('checkcontrol', ['angular-meteor', 'ui.router', 'ui.bootstrap', 'ui-notification', 'toggle-switch', 'ngLocale'])
-.run(['$rootScope', '$meteor', '$state', function($rootScope, $meteor, $state) {
-	Object.getPrototypeOf($rootScope).$meteor = $meteor;
-
+angular.module('checkcontrol', ['angular-meteor', 'angular-meteor.auth', 'ui.router', 'ui.bootstrap', 'ui-notification', 'toggle-switch', 'ngLocale'])
+.run( function($rootScope, $meteor, $state) {
 	$rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
 		switch(error) {
 			case 'AUTH_REQUIRED':
@@ -15,14 +13,16 @@ angular.module('checkcontrol', ['angular-meteor', 'ui.router', 'ui.bootstrap', '
 				return $state.go('error', {error: error});
 		}
 
-		console.log(error);
-//		$state.go('error.500');
+		if (error) {
+			console.error(error);
+		}
+	//		$state.go('error.500');
 	});
-}])
-.config(['$urlRouterProvider', '$locationProvider', function($urlRouterProvider, $locationProvider) {
+})
+.config(function($urlRouterProvider, $locationProvider) {
 	$urlRouterProvider.otherwise('/');
 	$locationProvider.html5Mode(true);
-}]);
+});
 
 function onReady() {
 	angular.bootstrap(document, ['checkcontrol']);
