@@ -54,10 +54,12 @@ angular.module('checkcontrol')
 				sort[this.getReactively('busqueda.filtro')+""] = this.getReactively('busqueda.inverso');
 				sort.fechaPago = 1
 			}
-			console.log(sort);
-
+			
 			return Cheques.find({
-				proveedor: { $regex : this.getReactively('busqueda.proveedor'), $options:"i"}
+				$or: [
+					{proveedor: { $regex : this.getReactively('busqueda.proveedor'), $options:"i"}},
+					{numeroFactura: { $regex : this.getReactively('busqueda.proveedor'), $options:"i"}}
+				]
 			}, {
 				sort : sort
 			})
@@ -110,6 +112,7 @@ angular.module('checkcontrol')
 				};
 			}
 		}).result.then(function(chequeNuevo) {
+			chequeNuevo.monto = parseFloat((chequeNuevo.monto).toFixed(2)); 
 			Cheques.insert(chequeNuevo, (error) => {
 				if (error) {
 					Notification.error("No pudo guardar el cheque, comuniquese con Fer");
