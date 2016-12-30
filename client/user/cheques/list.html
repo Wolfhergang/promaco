@@ -63,13 +63,20 @@
 			<div class="input-group">
 				<div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
 				<input type="text" class="form-control" placeholder="Buscar.." 
-					typeahead="proveedor.nombre for proveedor in vm.proveedores" ng-model="vm.busqueda.proveedor">
+					typeahead="proveedor.nombre for proveedor in vm.proveedores | filter:$viewValue | limitTo:5" 
+					ng-model="vm.busqueda.proveedor">
 			</div>
+		</div>
+		<div>
+			<button class="btn btn-success" ng-click="nuevoCheque()">
+				<i class="fa fa-plus"></i> Agregar cheque
+			</button>
 		</div>
 	</div>
 	<table class="table col-sm-12">
 		<thead>
 			<tr>
+				<th class="text-center">Excluir</th>
 				<th class="text-center">Numero de cheque</th>
 				<th class="text-center">Paguese a</th>
 				<th class="text-center">Numero de factura</th>
@@ -81,6 +88,7 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="cheque in vm.cheques" class="{{sePagaHoy(cheque)}}" ng-class="{'pagado': cheque.pagado}">
+				<td class="text-center"><input type="checkbox" ng-model="cheque.excluir"></td>
 				<td class="text-center">{{cheque.numero}}</td>
 				<td class="text-center">{{cheque.proveedor}}</td>
 				<td class="text-center">{{cheque.numeroFactura}}</td>
@@ -101,7 +109,4 @@
       <span class="label label-warning">No vencidos</span>
       <span class="label label-danger">Vencidos</span>
     </div>
-	<button class="btn btn-success btn-xs floating-plus" ng-click="nuevoCheque()">
-		<i class="fa fa-plus"></i> Agregar cheque
-	</button>
 </div>

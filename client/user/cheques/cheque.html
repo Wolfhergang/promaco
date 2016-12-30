@@ -34,7 +34,7 @@
 		<div class="form-group" ng-class="{'has-error': form.pagueseA.$invalid}">
 			<label class="control-label col-sm-3">Paguese a:</label>
 			<div class="col-sm-7">
-				<input name="pagueseA" type="text" class="form-control" ng-model="cheque.proveedor" typeahead="proveedor.nombre for proveedor in proveedores" required/>
+				<input name="pagueseA" type="text" class="form-control" ng-model="cheque.proveedor" typeahead="proveedor.nombre for proveedor in proveedores | filter:$viewValue | limitTo:5" required/>
 			</div>
 		</div>
 	</form>

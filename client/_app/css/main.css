@@ -14,12 +14,6 @@
 	background-color: #EF8C8C !important;
 }
 
-.floating-plus{
-	position: fixed;
-	bottom: 5px;
-	right: 1em;
-}
-
 .badge-fix{
 	bottom: 5px;
 	position: fixed;

@@ -22,5 +22,7 @@ Meteor.publish('users', function() {
 });
 
 Meteor.publish('proveedores', function(){
-	return Proveedores.find();
+	return Proveedores.find({
+		userId: this.userId
+	});
 });

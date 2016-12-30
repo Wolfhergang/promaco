@@ -179,8 +179,8 @@ angular.module('checkcontrol')
 		tomorrow.setDate(hoy.getDate()+1);
 
 		_.each($scope.$$vm.cheques, function(cheque){
-			if (cheque.fechaPago<=hoy && !cheque.pagado) $scope.$$vm.vencimientoH -= cheque.monto;
-			if (cheque.fechaPago<=tomorrow && !cheque.pagado) $scope.$$vm.vencimientoM -= cheque.monto;
+			if (cheque.fechaPago<=hoy && !cheque.pagado && !cheque.excluir) $scope.$$vm.vencimientoH -= cheque.monto;
+			if (cheque.fechaPago<=tomorrow && !cheque.pagado && !cheque.excluir) $scope.$$vm.vencimientoM -= cheque.monto;
 		});
    	};
 
